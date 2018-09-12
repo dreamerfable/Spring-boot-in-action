@@ -1,0 +1,18 @@
+spring:
+  thymeleaf:
+    cache: false
+    
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:mykeys.jks
+    key-store-password: keep0323
+    key-password: keep0323
+    
+logging:
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+    
+amazon:
+  associatedId: habuma-20
