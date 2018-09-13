@@ -1,11 +1,25 @@
 spring:
   thymeleaf:
     cache: false
-    
-logging:
-  level:
-    root: INFO
-    org.springframework.security: INFO
+  profiles:
+    active: production
     
 amazon:
-  associatedId: habuma-20
+  associatedId: dreamerfable
+  
+    
+---
+spring:
+  profiles: development
+  
+logging:
+  level:
+    root: DEBUG
+    
+---
+spring:
+  profiles: production
+
+logging:
+  level:
+    root: WARN     
