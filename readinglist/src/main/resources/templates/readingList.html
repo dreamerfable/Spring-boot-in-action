@@ -10,9 +10,7 @@
 	   <div th:unless="${#lists.isEmpty(books)}">
 	       <dl th:each="book : ${books}">
 	           <dt class="bookHeadline">
-	               <span th:text="${book.title}">Title</span> by
-	               <span th:text="${book.author}">Author</span>
-	               (ISBN: <span th:text="${book.isbn}">ISBN</span>)
+	               <span th:text="${book.title}">Title</span> by <span th:text="${book.author}"> Author </span> (ISBN: <span th:text="${book.isbn}">ISBN</span>)
 	               
 	           </dt>
 	           <dd class="bookDescription">
