@@ -7,7 +7,14 @@ spring:
 amazon:
   associatedId: dreamerfable
   
-    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always   
 ---
 spring:
   profiles: development
@@ -22,4 +29,4 @@ spring:
 
 logging:
   level:
-    root: WARN     
+    root: INFO    
