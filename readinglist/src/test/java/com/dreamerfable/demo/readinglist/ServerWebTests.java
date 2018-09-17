@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,15 +18,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = ReadinglistApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ServerWebTests {
 
-	private static ChromeDriver browser;
+	private static SafariDriver browser;
 
 	@Value("${local.server.port}")
 	private int port;
 
 	@BeforeClass
 	public static void openBrowser() {
-		browser = new ChromeDriver();
-		browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		browser = new SafariDriver();
+		browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 
 	@AfterClass
@@ -35,7 +35,7 @@ public class ServerWebTests {
 	}
 
 	@Test
-	public void addBookToEmptyList() {
+	public void addBookToEmptyList() throws InterruptedException {
 		String baseUrl = "http://localhost:" + port + "/readingList/dreamerfable";
 
 		browser.get(baseUrl);
@@ -48,11 +48,13 @@ public class ServerWebTests {
 		browser.findElementByName("description").sendKeys("DESCRIPTION");
 		browser.findElementByTagName("form").submit();
 
-		WebElement dl = browser.findElementByCssSelector("dt.bookHeadline");
-		assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN:1234567890", dl.getText());
+		Thread.sleep(1000);
 
-		WebElement dt = browser.findElementByCssSelector("dd.bookDescription");
-		assertEquals("DESCRIPTION", dt.getText());
+		WebElement dl = browser.findElementByCssSelector(".bookHeadline");
+		assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", dl.getText().trim());
+
+		WebElement dt = browser.findElementByCssSelector(".bookDescription");
+		assertEquals("DESCRIPTION", dt.getText().trim());
 	}
 
 }
