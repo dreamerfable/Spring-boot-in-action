@@ -11,10 +11,15 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: info,health
   endpoint:
+    shutdown:
+      enabled: true
     health:
-      show-details: always   
+      show-details: always 
+      
+info:
+  contactEmail: dreamerfable@gmail.com  
 ---
 spring:
   profiles: development
